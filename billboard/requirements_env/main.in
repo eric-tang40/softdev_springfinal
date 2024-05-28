@@ -1,0 +1,8 @@
+django==4.2
+django-extensions
+nodeenv 
+numpy
+pandas
+matplotlib
+pgadmin4
+jupyter
