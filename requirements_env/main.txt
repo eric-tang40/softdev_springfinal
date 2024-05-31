@@ -786,7 +786,6 @@ greenlet==1.1.2 \
     # via
     #   eventlet
     #   pgadmin4
-    #   sqlalchemy
 h11==0.14.0 \
     --hash=sha256:8f19fbbe99e72420ff35c00b27a34cb9937e902a8b810e2c88300c6f0a3b699d \
     --hash=sha256:e3fe4ac4b851c468cc8363d500db52c2ead036020723024a109d37346efaa761
@@ -947,9 +946,9 @@ jupyter-lsp==2.2.5 \
     --hash=sha256:45fbddbd505f3fbfb0b6cb2f1bc5e15e83ab7c79cd6e89416b248cb3c00c11da \
     --hash=sha256:793147a05ad446f809fd53ef1cd19a9f5256fd0a2d6b7ce943a982cb4f545001
     # via jupyterlab
-jupyter-server==2.14.0 \
-    --hash=sha256:659154cea512083434fd7c93b7fe0897af7a2fd0b9dd4749282b42eaac4ae677 \
-    --hash=sha256:fb6be52c713e80e004fac34b35a0990d6d36ba06fd0a2b2ed82b899143a64210
+jupyter-server==2.14.1 \
+    --hash=sha256:12558d158ec7a0653bf96cc272bc7ad79e0127d503b982ed144399346694f726 \
+    --hash=sha256:16f7177c3a4ea8fe37784e2d31271981a812f0b2874af17339031dc3510cc2a5
     # via
     #   jupyter-lsp
     #   jupyterlab
@@ -1388,8 +1387,8 @@ pexpect==4.9.0 \
     --hash=sha256:7236d1e080e4936be2dc3e326cec0af72acf9212a7e1d060210e70a47e253523 \
     --hash=sha256:ee7d41123f3c9911050ea2c2dac107568dc43b2d3b0c7557a33212c398ead30f
     # via ipython
-pgadmin4==8.6 \
-    --hash=sha256:fe689d787db76d136c817d46f4d2af99a413a4f66ad65f5e3f71b7ff33ed25bd
+pgadmin4==8.7 \
+    --hash=sha256:c820b54514a4c4bedacbda1c3286e59480a1a20732d72248ee948a8f48f68a0a
     # via -r requirements_env/main.in
 pillow==10.3.0 \
     --hash=sha256:048ad577748b9fa4a99a0548c64f2cb8d672d5bf2e643a739ac8faff1164238c \
@@ -1523,9 +1522,7 @@ psutil==5.9.8 \
 psycopg[binary]==3.1.12 \
     --hash=sha256:8ec5230d6a7eb654b4fb3cf2d3eda8871d68f24807b934790504467f1deee9f8 \
     --hash=sha256:cec7ad2bc6a8510e56c45746c631cf9394148bdc8a9a11fd8cf8554ce129ae78
-    # via
-    #   pgadmin4
-    #   psycopg
+    # via pgadmin4
 psycopg-binary==3.1.12 \
     --hash=sha256:000838cb5ab7851116b462e58893a96b0f1e35864135a6283f3242a730ec45d3 \
     --hash=sha256:03a851123d0155e1d6ca5b6cccf624e2fc71c8f7eae76f5100196e0fca047d30 \
@@ -2158,9 +2155,7 @@ traitlets==5.14.3 \
 typer[all]==0.12.3 \
     --hash=sha256:070d7ca53f785acbccba8e7d28b08dcd88f79f1fbda035ade0aecec71ca5c914 \
     --hash=sha256:49e73131481d804288ef62598d97a1ceef3058905aa536a1134f90891ba35482
-    # via
-    #   pgadmin4
-    #   typer
+    # via pgadmin4
 types-python-dateutil==2.9.0.20240316 \
     --hash=sha256:5d2f2e240b86905e40944dd787db6da9263f0deabef1076ddaed797351ec0202 \
     --hash=sha256:6b8cb66d960771ce5ff974e9dd45e38facb81718cc1e208b10b1baccbfdbee3b

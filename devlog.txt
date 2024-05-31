@@ -1,3 +1,5 @@
 ﻿TejasS – 2024-05-27 23:52: Finished working on initial design document. Added some features and applications that might change in the future.
 
-AidenT - 2024-05-028: did the authentication
+AidenT - 2024-05-28: did the authentication
+
+TejasS - 2024-05-30 23:12: Worked on the models and moved around files to fix the environment.
