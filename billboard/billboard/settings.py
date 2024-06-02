@@ -10,11 +10,27 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import os
+import json
+
 from pathlib import Path
+
+from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# JSON-based secrets module
+with open(os.path.join(
+    BASE_DIR, 'billboard', 'secrets.json')) as f: 
+    secrets = json.loads(f.read())
+def get_secret(setting, secrets=secrets):
+    '''Get the secret variable or return explicit exception.'''
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = 'Set the {0} environment variable'.format(setting)
+        raise ImproperlyConfigured(error_msg)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -32,6 +48,7 @@ AUTH_USER_MODEL = "rankings.User"
 # Application definition
 
 INSTALLED_APPS = [
+    'django_extensions',
     'core',
     'django.contrib.admin', # Comment this out to add User model
     'django.contrib.auth',
@@ -77,9 +94,13 @@ WSGI_APPLICATION = 'billboard.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": get_secret('database_name'),
+        "USER": get_secret('database_user'),
+        "PASSWORD": get_secret('database_pwd'),
+        "HOST": get_secret('database_host'),
+        "PORT": get_secret('database_port'),
     }
 }
 
@@ -126,3 +147,9 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
+
+API_KEY = get_secret("api")
+
+GRAPH_MODELS = {
+  'app_labels': ["myapp1", "myapp2", "auth"],
+}

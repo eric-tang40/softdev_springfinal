@@ -1,3 +1,10 @@
 -c main.txt
 
-nodeenv
+django-extensions
+nodeenv 
+numpy
+pandas
+matplotlib
+pgadmin4
+jupyter
+pygraphviz
