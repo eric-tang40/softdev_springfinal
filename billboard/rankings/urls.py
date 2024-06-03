@@ -1,8 +1,10 @@
 from django.urls import path
-from .views import get_billboard_data
+from . import views
 
 app_name = 'rankings'
 
 urlpatterns = [
-    path('', get_billboard_data, name='get_billboard_data'), 
-]
+    path("songs/", views.song_list, name="song_list"),
+    path("songs/<int:pk>/", views.SongDetailView.as_view(), name="song_detail"),
+    path('songs/<int:pk>/toggle_favorites/', views.add_to_favorites, name='add_to_favorites'),
+    ]

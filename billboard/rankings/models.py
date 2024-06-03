@@ -5,7 +5,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
-    pass
+    email = models.EmailField(unique=True, blank=False)
 
 class Song(models.Model):
     title = models.CharField(max_length=255)
@@ -26,5 +26,8 @@ class Favorite(models.Model):
     song = models.ForeignKey(Song, on_delete=models.CASCADE)
     added_date = models.DateField(auto_now_add=True)
 
+    class Meta:
+        unique_together = ('user', 'song')
+        
     def __str__(self):
         return f"{self.user.username} - {self.song.title}"

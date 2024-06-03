@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls), # Comment this out to add User model
     path('accounts/', include("django.contrib.auth.urls")),
     path('rankings/', include("rankings.urls")),
+    path('core/', include('core.urls')),
     path("", TemplateView.as_view(template_name="home.html"), name="home"),
     
 ]
