@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Top 100 Billboard Songs</h2>
+
+{% if error %}
+<p>{{ error }}</p>
+{% else %}
+<table>
+    <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Title</th>
+            <th>Artist</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for song in songs %}
+        <tr>
+            <td>{{ song.rank }}</td>
+            <td>{{ song.title }}</td>
+            <td>{{ song.artist }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+{% endblock %}
