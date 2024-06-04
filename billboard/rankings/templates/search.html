@@ -1,0 +1,11 @@
+{% load django_vite %}
+{% block content %}
+
+<h1>Search for a song</h1>
+    <div id="app"></div>
+    
+{% endblock content %}
+{% block js %}
+  {% vite_hmr_client %}
+  {% vite_asset 'src/apps/search/search.js' %}
+{% endblock js %}

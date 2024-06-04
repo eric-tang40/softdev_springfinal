@@ -29,3 +29,15 @@ def add_to_favorites(request, song_id):
         return JsonResponse({'status': 'added'})
     else:
         return JsonResponse({'status': 'not added'})
+    
+def search(request):
+    query = request.GET.get('q', '')
+    if query:
+        songs = Song.objects.filter(title__icontains=query)
+        results = [{'id': song.id, 'title': song.title, 'artist': song.artist} for song in songs]
+    else:
+        results = []
+    return JsonResponse(results, safe=False)
+
+def search_page(request):
+    return render(request, 'search.html')
