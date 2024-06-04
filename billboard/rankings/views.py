@@ -33,8 +33,10 @@ def add_to_favorites(request, song_id):
         return JsonResponse({'status': 'added'})
     else:
         return JsonResponse({'status': 'not added'})
-
+    
+@login_required
 def fetch_and_display_songs(request):
+    print("View function called")
     api_key = settings.API_KEY
 
     conn = http.client.HTTPSConnection("billboard-api2.p.rapidapi.com")
@@ -44,17 +46,26 @@ def fetch_and_display_songs(request):
         'x-rapidapi-host': "billboard-api2.p.rapidapi.com"
     }
 
-    conn.request("GET", "/hot-100?date=2019-05-11&range=1-100", headers=headers)  # Placeholder date
+    conn.request("GET", "/hot-100?date=2019-05-11&range=1-100", headers=headers)
 
     res = conn.getresponse()
+    print(f"API request status: {res.status}")
+
+    if res.status != 200:
+        print(f"API request failed with status {res.status}")
+        return JsonResponse({'error': 'API request failed'}, status=res.status)
+
     data = res.read()
+    print("Raw API response:", data)
 
     songs = data.decode("utf-8")
+    print("Decoded API response:", songs)
+
     songs_data = json.loads(songs)
-    print("API response:", songs_data)  # Add this line
+    print("JSON API response:", songs_data)
 
     song_list = songs_data.get('content', [])
-    print("Song list:", song_list)  # Add this line
+    print("Song list:", song_list)
 
     def process_song_data(songs_data):
         for song_info in songs_data:
@@ -64,7 +75,7 @@ def fetch_and_display_songs(request):
             peak_position = int(song_info.get('peak position'))
             weeks_on_chart = int(song_info.get('weeks on chart'))
 
-            chart_date = parse_date('2019-05-11')  # Placeholder date
+            chart_date = parse_date('2019-05-11')
 
             song, created = Song.objects.update_or_create(
                 title=title,
@@ -86,8 +97,7 @@ def fetch_and_display_songs(request):
 
     process_song_data(song_list)
 
-    # Fetch the songs from the database to pass to the template
-    songs = Song.objects.filter(chart_date='2019-05-11')  # Use the same date as above
-    print(f"Number of songs: {songs.count()}")  # Add this line
+    songs = Song.objects.filter(chart_date='2019-05-11')
+    print(f"Number of songs: {songs.count()}")
 
-    return render(request, 'song_list.html', {'songs': songs})
+    return render(request, 'rankings/song_list.html', {'songs': songs})

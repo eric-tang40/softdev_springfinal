@@ -17,6 +17,8 @@ class Song(models.Model):
     weeks_on_chart = models.IntegerField(blank=True, null=None)
     label = models.CharField(max_length=255, blank=True, null=True)
     genre = models.CharField(max_length=255, blank=True, null=True)
+    weeks_at_no_1 = models.IntegerField(blank=True, null=True)
+    last_week = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.title} by {self.artist}"
