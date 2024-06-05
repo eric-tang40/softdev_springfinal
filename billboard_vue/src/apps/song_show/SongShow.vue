@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ song.title }} by {{ song.artist }}</h1>
+    <h1>{{ songData.title }} by {{ songData.artist }}</h1>
     <button @click="toggleFavorite">
       {{ isFavorited ? 'Remove from Favorites' : 'Add to Favorites' }}
     </button>
@@ -10,43 +10,43 @@
 <script>
 export default {
   name: 'SongShow',
-  props: [
-    songId: Number,
-    isFavorited: Boolean
-  ],
+  // props: {
+  //   songId: Number,
+  //   isFavorited: Boolean
+  // },
   data() {
     return {
-      song: {},
       csrf_token: ext_csrf_token,
+      //songId: ext_songId,
+      songData: ext_songData,
+      isFavorited: 0,
+      isFavorited: false,
     };
   },
   methods: {
-    fetchSongDetails() {
-      fetch(`/songs/${this.songId}/`)
-        .then(response => response.json())
-        .then(data => {
-          this.song = data;
-        })
-        .catch(error => console.error('Error:', error));
-    },
     toggleFavorite() {
-      fetch(`/songs/${this.songId}/toggle_favorites/`, {
+      fetch(`/rankings/songs/${this.songData.id}/toggle_favorites/`, {
         method: 'POST',
         headers: {
           'X-CSRFToken': this.csrf_token,
           'Content-Type': 'application/json'
-        }
+        },
+        credentials: 'include'
       })
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(response.status);
+        }
+        return response.json();
+      })
       .then(data => {
-        this.isFavorited = !this.isFavorited;
+        this.isFavorited = data.status == 'added' ? 1 : 0;
         alert(`Song has been ${data.status}.`);
       })
-      .catch(error => console.error('Error:', error));
+      .catch(error => {
+        console.error(error);
+      });
     }
   },
-  mounted() {
-    this.fetchSongDetails();
-  }
 }
 </script>

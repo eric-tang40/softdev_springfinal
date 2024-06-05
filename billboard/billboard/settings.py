@@ -141,6 +141,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "rankings/static",  
+]
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "billboard_static")
 
 # Default primary key field type
@@ -153,7 +156,8 @@ LOGOUT_REDIRECT_URL = "home"
 API_KEY = get_secret("api")
 
 GRAPH_MODELS = {
-  'app_labels': ["myapp1", "myapp2", "auth"],
+ 'all_applications': True,
+ 'group_models': True,
 }
 
 DJANGO_VITE_ASSETS_PATH = os.path.join(BASE_DIR, "core", "static", "vite")

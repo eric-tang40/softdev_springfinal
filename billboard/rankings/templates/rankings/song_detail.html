@@ -4,15 +4,15 @@
 
 {% block content %}
 <div id="app">
-    <h1>hi</h1>
-    <song-show :song-id="{{ song.id }}" :is-favorited="{{ song.is_favorited }}"></song-show>
-</div></div>
+    <app></app>
+</div>
 {% endblock content %}
 
 {% block js %}
     {{ block.super }}
     <script>
         var ext_csrf_token = '{{ csrf_token }}';
+        var ext_songData = {{ song_dict | safe }};
     </script>
     {% vite_hmr_client %}
     {% vite_asset 'src/apps/song_show/song_show.js' %}
