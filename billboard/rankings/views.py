@@ -34,10 +34,10 @@ def search(request):
     query = request.GET.get('q', '')
     if query:
         songs = Song.objects.filter(title__icontains=query)
-        results = [{'id': song.id, 'title': song.title, 'artist': song.artist} for song in songs]
+        results = [{'id': song.id, 'title': song.title, 'artist': song.artist} for song in songs]#we need to fix this
     else:
         results = []
     return JsonResponse(results, safe=False)
 
 def search_page(request):
-    return render(request, 'search.html')
+    return render(request, 'rankings/search.html')
