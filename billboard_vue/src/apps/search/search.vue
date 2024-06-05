@@ -1,6 +1,7 @@
 <template>
   <div>
-    <input v-model="query" @keyup.enter="searchSong" placeholder="Search for a song">
+    <h1>Search for a Song</h1>
+    <input v-model="query" @keyup.enter="searchSong" placeholder="Search for a song" />
     <button @click="searchSong">Search</button>
     <div v-if="songs.length">
       <ul>
@@ -23,17 +24,61 @@ export default {
   },
   methods: {
     async searchSong() {
+      
       if (this.query.trim() === '') {
-        this.songs = []
-        return
+        this.songs = [];
+        return;
       }
-      const response = await fetch(`/search/?q=${this.query}`)
-      this.songs = await response.json()
+      try {
+        const response = await fetch(`/rankings/search/?q=${this.query.trim()}`);
+        
+        if (response.ok) {
+          // Parse the JSON response (Error here)
+          const jsonResponse = await response.json();
+
+          // Log the response to ensure it's correct
+          console.log("JSON Response:", jsonResponse);
+          this.songs = jsonResponse;
+          console.log("Songs Array:", this.songs);
+        } else {
+          console.error('Failed to fetch songs');
+          
+          this.songs = [];
+        }
+      } catch (error) {
+        console.error('An error occurred:', error);
+        // this.songs = [];
+      }
     }
   }
 }
 </script>
 
-<style>
-
+<style scoped>
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+input {
+  padding: 10px;
+  font-size: 16px;
+  margin-right: 10px;
+}
+button {
+  padding: 10px;
+  font-size: 16px;
+}
+ul {
+  margin-top: 20px;
+  list-style: none;
+  padding: 0;
+}
+li {
+  padding: 5px 0;
+}
+p {
+  margin-top: 20px;
+  font-size: 16px;
+  color: gray;
+}
 </style>

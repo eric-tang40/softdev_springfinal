@@ -1,5 +1,5 @@
 {
-  "name": "billboard_vue",
+  "name": "erict_nodejs",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -14,12 +14,13 @@
     "vue": "^3.4.21"
   },
   "devDependencies": {
-    "@rushstack/eslint-patch": "^1.8.0",
+    "@rushstack/eslint-patch": "^1.3.3",
     "@vitejs/plugin-vue": "^5.0.4",
-    "@vue/eslint-config-prettier": "^9.0.0",
-    "eslint": "^8.57.0",
-    "eslint-plugin-vue": "^9.23.0",
-    "prettier": "^3.2.5",
-    "vite": "^5.2.8"
+    "@vue/eslint-config-prettier": "^8.0.0",
+    "eslint": "^8.49.0",
+    "eslint-plugin-vue": "^9.17.0",
+    "prettier": "^3.0.3",
+    "vite": "^5.1.5",
+    "vite-plugin-vue-devtools": "^7.0.16"
   }
 }

@@ -1,4 +1,4 @@
-import 'vite/modulepreload-polyfill';
-import { createApp } from 'vue';
+import 'vite/modulepreload-polyfill'
+import { createApp } from 'vue'
 import App from './search.vue'
-createApp(App).mount("#app")
+createApp(App).mount('#app')

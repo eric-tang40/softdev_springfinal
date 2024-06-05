@@ -20,8 +20,8 @@ export default {
       //songId: ext_songId,
       songData: ext_songData,
       isFavorited: 0,
-      isFavorited: false,
-    };
+      isFavorited: false
+    }
   },
   methods: {
     toggleFavorite() {
@@ -33,20 +33,20 @@ export default {
         },
         credentials: 'include'
       })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(response.status);
-        }
-        return response.json();
-      })
-      .then(data => {
-        this.isFavorited = data.status == 'added' ? 1 : 0;
-        alert(`Song has been ${data.status}.`);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(response.status)
+          }
+          return response.json()
+        })
+        .then((data) => {
+          this.isFavorited = data.status == 'added' ? 1 : 0
+          alert(`Song has been ${data.status}.`)
+        })
+        .catch((error) => {
+          console.error(error)
+        })
     }
-  },
+  }
 }
 </script>
