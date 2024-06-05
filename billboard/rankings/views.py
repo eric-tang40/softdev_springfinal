@@ -21,14 +21,32 @@ class SongDetailView(LoginRequiredMixin, DetailView):
     template_name = 'rankings/song_detail.html'
     context_object_name = 'song'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        song_dict = {
+            'id': self.object.id,
+            'title': self.object.title,
+            'artist': self.object.artist,
+        }
+        context['song_dict'] = song_dict
+        return context
+
+from django.http import JsonResponse, HttpResponseNotAllowed
+
 @login_required
-def add_to_favorites(request, song_id):
+def toggle_favorites(request, song_id):
+    if request.method != 'POST':
+        return HttpResponseNotAllowed(['POST'], 'Invalid method')
+
     song = get_object_or_404(Song, pk=song_id)
-    favorite, created = Favorite.objects.get_or_create(user=request.user, song=song)
-    if created:
-        return JsonResponse({'status': 'added'})
+    favorite = Favorite.objects.filter(user=request.user, song=song)
+    if favorite.exists():
+        favorite.delete()
+        return JsonResponse({'status': 'removed'})
     else:
-        return JsonResponse({'status': 'not added'})
+        Favorite.objects.create(user=request.user, song=song)
+        return JsonResponse({'status': 'added'})
+
     
 def search(request):
     query = request.GET.get('q', '')
@@ -41,3 +59,4 @@ def search(request):
 
 def search_page(request):
     return render(request, 'search.html')
+
