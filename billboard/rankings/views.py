@@ -1,6 +1,6 @@
 from django.urls import reverse_lazy
 from django.contrib import messages
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
 from .models import Song, Favorite, User
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -8,13 +8,49 @@ from django.forms.models import model_to_dict
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
+from django.utils.dateparse import parse_date
+from django.urls import reverse
+import subprocess
 
 
 
 @login_required
 def song_list(request):
-    songs = Song.objects.all().order_by('rank')
+    date_str = request.GET.get('date')
+    if date_str:
+        date = parse_date(date_str)
+        songs = Song.objects.filter(chart_date=date).order_by('rank')
+    else:
+        date = parse_date('2024-06-05')
+        songs = Song.objects.filter(chart_date=date).order_by('rank')
+
     return render(request, 'rankings/song_list.html', {'songs': songs})
+
+
+def update_songs(request):
+    date_str = request.GET.get('date')
+    action = request.GET.get('action')
+
+    if action == 'filter':
+        return redirect(f"{reverse('rankings:song_list')}?date={date_str}")
+    elif action == 'fetch' and date_str:
+        try:
+            result = subprocess.run(['python', 'initialize1.py', date_str], check=True, capture_output=True, text=True)
+            if result.returncode == 0:
+                messages.success(request, 'Songs data successfully fetched and updated for ' + date_str)
+            else:
+                messages.error(request, 'Failed to update songs data: ' + result.stderr)
+        except subprocess.CalledProcessError as e:
+            messages.error(request, f'Error updating songs data: {str(e)}')
+        
+        return redirect('rankings:song_list')
+    else:
+        messages.error(request, "Please select a valid date to fetch data.")
+    
+    return redirect('rankings:song_list')
+
+
+
 
 class SongDetailView(LoginRequiredMixin, DetailView):
     model = Song

@@ -2,6 +2,16 @@
 
 {% block content %}
 <h2>Song List</h2>
+
+<form method="get" action="{% url 'rankings:update_songs' %}">
+    <label for="date">Select a date:</label>
+    <input type="date" id="date" name="date" value="{{ request.GET.date|default_if_none:'' }}" required>
+    <button type="submit" name="action" value="filter">Filter</button>
+    {% if not songs %}
+        <button type="submit" name="action" value="fetch">Get Data</button>
+    {% endif %}
+</form>
+
 <table>
     <thead>
         <tr>
@@ -27,7 +37,7 @@
         </tr>
         {% empty %}
         <tr>
-            <button>Get Data</button>
+            No song data found.
         </tr>
         {% endfor %}
     </tbody>
