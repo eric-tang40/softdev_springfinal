@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>My Favorite Songs</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Song</th>
+                <th>Artist</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for favorite in object_list %}
+                <tr>
+                    <td>{{ favorite.added_date }}
+                    <td>{{ favorite.song.title }}</td>
+                    <td>{{ favorite.song.artist }}</td>
+                    <td>
+                        <a href="{% url 'rankings:song_detail' favorite.song.id %}">View</a>
+                    </td>
+                    <td>
+                        <form method="post" action="{% url 'rankings:toggle_favorites' favorite.song.id %}">
+                            {% csrf_token %}
+                            <button type="submit">Remove from Favorites</button>
+                        </form>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    No favorite songs found.
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

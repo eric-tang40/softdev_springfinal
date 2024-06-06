@@ -11,6 +11,8 @@ from django.shortcuts import get_object_or_404
 from django.utils.dateparse import parse_date
 from django.urls import reverse
 import subprocess
+from django.http import JsonResponse, HttpResponseNotAllowed, HttpResponse
+from .initialize2 import update
 
 
 
@@ -50,24 +52,30 @@ def update_songs(request):
     return redirect('rankings:song_list')
 
 
-
-
 class SongDetailView(LoginRequiredMixin, DetailView):
     model = Song
     template_name = 'rankings/song_detail.html'
     context_object_name = 'song'
-
+    update()
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        favorite = Favorite.objects.filter(user=self.request.user, song__title=self.object.title)
+        if favorite.exists():
+            is_favorite = 1
+        else:
+            is_favorite = 0
         song_dict = {
             'id': self.object.id,
             'title': self.object.title,
             'artist': self.object.artist,
+            'album_name': self.object.album_name,
+            'label': self.object.label,
+            'favorite': is_favorite,
         }
         context['song_dict'] = song_dict
         return context
 
-from django.http import JsonResponse, HttpResponseNotAllowed
 
 @login_required
 def toggle_favorites(request, song_id):
@@ -75,7 +83,7 @@ def toggle_favorites(request, song_id):
         return HttpResponseNotAllowed(['POST'], 'Invalid method')
 
     song = get_object_or_404(Song, pk=song_id)
-    favorite = Favorite.objects.filter(user=request.user, song=song)
+    favorite = Favorite.objects.filter(user=request.user, song__title=song.title)
     if favorite.exists():
         favorite.delete()
         return JsonResponse({'status': 'removed'})
@@ -88,7 +96,7 @@ def search(request):
     query = request.GET.get('q', '')
     if query:
         songs = Song.objects.filter(title__icontains=query)
-        results = [{'id': song.id, 'title': song.title, 'artist': song.artist} for song in songs]#we need to fix this
+        results = [{'id': song.id, 'title': song.title, 'artist': song.artist} for song in songs] #we need to fix this
     else:
         results = []
     return JsonResponse(results, safe=False)
@@ -96,3 +104,9 @@ def search(request):
 def search_page(request):
     return render(request, 'rankings/search.html')
 
+class FavoriteListView(ListView):
+    model = Favorite
+    template_name = 'rankings/favorites.html'
+
+    def get_queryset(self):
+        return Favorite.objects.filter(user=self.request.user).order_by('added_date')

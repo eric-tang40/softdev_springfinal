@@ -1,6 +1,11 @@
 <template>
   <div>
-    <h1>{{ songData.title }} by {{ songData.artist }}</h1>
+    <h1>{{ songData.title }}</h1>
+    <div>
+      Artist: {{ songData.artist }} <br>
+      Album: {{ songData.album_name }} <br>
+      Label: {{ songData.label }}
+    </div>
     <button @click="toggleFavorite">
       {{ isFavorited ? 'Remove from Favorites' : 'Add to Favorites' }}
     </button>
@@ -10,17 +15,11 @@
 <script>
 export default {
   name: 'SongShow',
-  // props: {
-  //   songId: Number,
-  //   isFavorited: Boolean
-  // },
   data() {
     return {
       csrf_token: ext_csrf_token,
-      //songId: ext_songId,
       songData: ext_songData,
-      isFavorited: 0,
-      isFavorited: false
+      isFavorited: ext_songData.favorite,
     }
   },
   methods: {
