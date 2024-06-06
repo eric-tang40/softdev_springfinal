@@ -12,3 +12,4 @@ TejasS - 2024-06-04 22:51: Fixed the issue with Vue code. Now can add and remove
 
 EricT - 2023-06-05: More work on search feature
 
+TejasS - 2023-06-06 18:44: Finished the calendar to parse the dates for billboard. Fixed implementation of first API and implemented a second API to add data to database. Finished song detail page to give some more information about songs and give space for graphs. Created favorites page and way to sort favorites by song title to avoid copies. Fixed the favorites button issue.
