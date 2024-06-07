@@ -2,7 +2,7 @@
 
 Collaborators: Eric Tang, Tejas Siddaramaiah, Jason Lei, Aiden Tan
 
-# COVID Tracker
+# Billboard
 
 # Roles
 
