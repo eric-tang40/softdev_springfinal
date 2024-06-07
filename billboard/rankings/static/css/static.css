@@ -1,0 +1,137 @@
+/* Random CSS Example */
+
+/* Universal selector */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Body styling */
+  body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  /* Header styling */
+  header {
+    background: #333;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  /* Navigation styling */
+  nav ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  nav ul li {
+    display: inline;
+    margin: 0 10px;
+  }
+  
+  nav ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  nav ul li a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Main content styling */
+  main {
+    padding: 2rem;
+    background: #f4f4f4;
+  }
+  
+  main h1 {
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  main p {
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Sidebar styling */
+  .sidebar {
+    float: right;
+    width: 30%;
+    padding: 1rem;
+    background: #e2e2e2;
+  }
+  
+  .sidebar h2 {
+    font-size: 1.5rem;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    margin-bottom: 10px;
+  }
+  
+  .sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .sidebar ul li a:hover {
+    color: #ff7e5f;
+  }
+  
+  /* Footer styling */
+  footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  footer p {
+    margin: 0;
+  }
+  
+  /* Button styling */
+  .button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background: #ff7e5f;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    background: #feb47b;
+  }
+  
+  /* Media query for responsive design */
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 100%;
+      float: none;
+      margin-bottom: 1rem;
+    }
+  
+    nav ul li {
+      display: block;
+      text-align: center;
+      margin: 5px 0;
+    }
+  }
+  
