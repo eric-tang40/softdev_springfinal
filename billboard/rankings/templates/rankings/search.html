@@ -4,10 +4,13 @@
 {% block content %}
 
 <h1>Search for a song</h1>
-    <div id="app"></div>
-    
+<div id="app">
+  <app></app>
+</div>
 {% endblock content %}
+
 {% block js %}
+  {{ block.super }}
   {% vite_hmr_client %}
   {% vite_asset 'src/apps/search/search.js' %}
 {% endblock js %}

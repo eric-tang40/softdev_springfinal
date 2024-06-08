@@ -17,6 +17,7 @@ export default defineConfig({
     outDir: backendPath + '/core/static/vite/', rollupOptions: {
     input: {
       vue_song_show: "./src/apps/song_show/song_show.js",
+      vue_search: "./src/apps/search/search.js",
       }, 
     },
   }, 

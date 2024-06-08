@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Search for a Song</h1>
+    <h1>Any Song in Database</h1>
     <input v-model="query" @keyup.enter="searchSong" placeholder="Search for a song" />
     <button @click="searchSong">Search</button>
     <div v-if="songs.length">
@@ -16,6 +16,7 @@
 
 <script>
 export default {
+  name: 'search',
   data() {
     return {
       query: '',
@@ -34,8 +35,9 @@ export default {
         
         if (response.ok) {
           // Parse the JSON response (Error here)
-          const jsonResponse = await response.json();
-
+          const text = await response.text();
+          console.log(response)
+          const jsonResponse = JSON.parse(text)
           // Log the response to ensure it's correct
           console.log("JSON Response:", jsonResponse);
           this.songs = jsonResponse;

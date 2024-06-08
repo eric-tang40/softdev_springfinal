@@ -1,20 +1,9 @@
-/* Random CSS Example */
-
-/* Universal selector */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
   }
-  
-  /* Body styling */
-  body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(to right, #ff7e5f, #feb47b);
-    color: #333;
-    line-height: 1.6;
-  }
-  
+
   /* Header styling */
   header {
     background: #333;
@@ -58,36 +47,28 @@
     margin-bottom: 1.5rem;
   }
   
-  /* Sidebar styling */
-  .sidebar {
-    float: right;
-    width: 30%;
-    padding: 1rem;
-    background: #e2e2e2;
+  .item {
+    padding: 10px;
+    margin: 10px;
+    z-index: 20;
+    border: none;
   }
-  
-  .sidebar h2 {
-    font-size: 1.5rem;
+
+  .item a {
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 20px;
+      letter-spacing: 1px;
+      color: #fff;
   }
-  
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .sidebar ul li {
-    margin-bottom: 10px;
-  }
-  
-  .sidebar ul li a {
-    text-decoration: none;
-    color: #333;
-  }
-  
-  .sidebar ul li a:hover {
-    color: #ff7e5f;
-  }
-  
+
+  .active {
+    z-index: 1;
+    padding: 10px;
+    background: #000;
+    border-radius: 5px;
+}
+
   /* Footer styling */
   footer {
     background: #333;
@@ -119,19 +100,3 @@
   .button:hover {
     background: #feb47b;
   }
-  
-  /* Media query for responsive design */
-  @media (max-width: 768px) {
-    .sidebar {
-      width: 100%;
-      float: none;
-      margin-bottom: 1rem;
-    }
-  
-    nav ul li {
-      display: block;
-      text-align: center;
-      margin: 5px 0;
-    }
-  }
-  

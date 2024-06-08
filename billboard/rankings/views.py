@@ -28,7 +28,7 @@ def song_list(request):
 
     return render(request, 'rankings/song_list.html', {'songs': songs})
 
-
+@login_required
 def update_songs(request):
     date_str = request.GET.get('date')
     action = request.GET.get('action')
@@ -91,20 +91,21 @@ def toggle_favorites(request, song_id):
         Favorite.objects.create(user=request.user, song=song)
         return JsonResponse({'status': 'added'})
 
-    
+@login_required
 def search(request):
     query = request.GET.get('q', '')
     if query:
-        songs = Song.objects.filter(title__icontains=query)
+        songs = Song.objects.filter(title__icontains=query).distinct()
         results = [{'id': song.id, 'title': song.title, 'artist': song.artist} for song in songs] #we need to fix this
     else:
         results = []
     return JsonResponse(results, safe=False)
 
+@login_required
 def search_page(request):
     return render(request, 'rankings/search.html')
 
-class FavoriteListView(ListView):
+class FavoriteListView(LoginRequiredMixin, ListView):
     model = Favorite
     template_name = 'rankings/favorites.html'
 
