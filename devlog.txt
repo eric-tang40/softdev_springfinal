@@ -6,7 +6,7 @@ TejasS - 2024-05-30 23:12: Worked on the models and moved around files to fix th
 
 TejasS - 2024-06-02 23:29: Fixed the code for the API so that we can access the data. Finished authentication where multiple different accounts can sign in and register. Made the database work for all the song data. Worked on the favorites feature and got the database part working but issues with the Vue portion.
 
-AidenT - 2024-06-04: worked on search
+AidenT - 2024-06-04: started search feature, linked vue and django template, search is still not working
 
 TejasS - 2024-06-04 22:51: Fixed the issue with Vue code. Now can add and remove favorites from the database. Small issue with the change button.
 
