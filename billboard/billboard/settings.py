@@ -142,7 +142,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    BASE_DIR / "static/",  
+    BASE_DIR / "core/static/",  
 ]
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "billboard_static")
 

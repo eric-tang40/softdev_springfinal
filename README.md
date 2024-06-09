@@ -60,7 +60,7 @@ IMPORTANT: You must comment out two lines of code before migrating the database 
 
 First, in billboard/billboard/settings.py, in the Installed Apps: 'django.contrib.admin'. We have left a comment denoting this.
 
-Secong in billboard/billboard/urls.py, in the URL Patterns: path('admin/', admin.site.urls). We have also left a comment denoting this.
+Second, in billboard/billboard/urls.py, in the URL Patterns: path('admin/', admin.site.urls). We have also left a comment denoting this.
 
 python manage.py makemigrations
 

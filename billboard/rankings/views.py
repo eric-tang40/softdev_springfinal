@@ -56,10 +56,15 @@ class SongDetailView(LoginRequiredMixin, DetailView):
     model = Song
     template_name = 'rankings/song_detail.html'
     context_object_name = 'song'
-    update()
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        if self.request.GET.get('update'):
+            try:
+                update()
+                context['update_status'] = "Update successful."
+            except Exception as e:
+                context['update_status'] = f"Update failed: {str(e)}"
         favorite = Favorite.objects.filter(user=self.request.user, song__title=self.object.title)
         if favorite.exists():
             is_favorite = 1

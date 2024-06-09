@@ -1,15 +1,19 @@
 ﻿TejasS – 2024-05-27 23:52: Finished working on initial design document. Added some features and applications that might change in the future.
 
-AidenT - 2024-05-28: did the authentication
+AidenT - 2024-05-28 14:40: did the authentication
 
 TejasS - 2024-05-30 23:12: Worked on the models and moved around files to fix the environment.
 
 TejasS - 2024-06-02 23:29: Fixed the code for the API so that we can access the data. Finished authentication where multiple different accounts can sign in and register. Made the database work for all the song data. Worked on the favorites feature and got the database part working but issues with the Vue portion.
 
-AidenT - 2024-06-04: started search feature, linked vue and django template, search is still not working
+AidenT - 2024-06-04 20:10: worked on search
 
 TejasS - 2024-06-04 22:51: Fixed the issue with Vue code. Now can add and remove favorites from the database. Small issue with the change button.
 
-EricT - 2023-06-05: More work on search feature
+EricT - 2024-06-05 14:40: More work on search feature
 
-TejasS - 2023-06-06 18:44: Finished the calendar to parse the dates for billboard. Fixed implementation of first API and implemented a second API to add data to database. Finished song detail page to give some more information about songs and give space for graphs. Created favorites page and way to sort favorites by song title to avoid copies. Fixed the favorites button issue.
+TejasS - 2024-06-06 18:44: Finished the calendar to parse the dates for billboard. Fixed implementation of first API and implemented a second API to add data to the database. Finished song detail page to give some more information about songs and give space for graphs. Created favorites page and way to sort favorites by song title to avoid copies. Fixed the favorites button issue.
+
+JasonL - 2024-06-07 14:40: Worked on CSS for different parts
+
+TejasS - 2024-06-08 23:52: Worked on the navigation bar and added onto and implemented the CSS into base. Fixed the search feature with different type of view. Also implemented bootstrap. Fixed issue with migrations.
