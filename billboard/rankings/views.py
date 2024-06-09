@@ -13,6 +13,7 @@ from django.urls import reverse
 import subprocess
 from django.http import JsonResponse, HttpResponseNotAllowed, HttpResponse
 from .initialize2 import update
+from .initialize1 import process_song_data
 
 
 
@@ -33,23 +34,21 @@ def update_songs(request):
     date_str = request.GET.get('date')
     action = request.GET.get('action')
 
+    redirect_url = reverse('rankings:song_list')
+    if date_str:
+        redirect_url += f"?date={date_str}"
+
     if action == 'filter':
-        return redirect(f"{reverse('rankings:song_list')}?date={date_str}")
+        return redirect(redirect_url)
     elif action == 'fetch' and date_str:
         try:
-            result = subprocess.run(['python', 'initialize1.py', date_str], check=True, capture_output=True, text=True)
-            if result.returncode == 0:
-                messages.success(request, 'Songs data successfully fetched and updated for ' + date_str)
-            else:
-                messages.error(request, 'Failed to update songs data: ' + result.stderr)
-        except subprocess.CalledProcessError as e:
+            process_song_data(date_str)
+        except Exception as e:
             messages.error(request, f'Error updating songs data: {str(e)}')
-        
-        return redirect('rankings:song_list')
     else:
         messages.error(request, "Please select a valid date to fetch data.")
     
-    return redirect('rankings:song_list')
+    return redirect(redirect_url)
 
 
 class SongDetailView(LoginRequiredMixin, DetailView):
@@ -59,12 +58,7 @@ class SongDetailView(LoginRequiredMixin, DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if self.request.GET.get('update'):
-            try:
-                update()
-                context['update_status'] = "Update successful."
-            except Exception as e:
-                context['update_status'] = f"Update failed: {str(e)}"
+        update()
         favorite = Favorite.objects.filter(user=self.request.user, song__title=self.object.title)
         if favorite.exists():
             is_favorite = 1

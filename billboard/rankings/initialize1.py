@@ -1,3 +1,4 @@
+from calendar import week
 import os
 os.chdir("..")
 
@@ -35,12 +36,22 @@ def process_song_data(date):
     songs_data = json.loads(songs)
     song_list = songs_data.get('content', [])
     
+    def safe_int(value, default=0):
+        try:
+            if value in (None, 'None', ''):
+                return default
+            return int(value)
+        except ValueError:
+            return default
+        
     for song_key, song_info in song_list.items():
-        title = song_info.get('title')
-        artist = song_info.get('artist')
-        rank = int(song_info.get('rank'))
-        peak_position = int(song_info.get('peak position'))
-        weeks_on_chart = int(song_info.get('weeks on chart'))
+        title = song_info.get('title', '')
+        artist = song_info.get('artist', '')
+        rank = safe_int(song_info.get('rank'))
+        peak_position = safe_int(song_info.get('peak position'))
+        weeks_on_chart = safe_int(song_info.get('weeks on chart'))
+        weeks_at_no_1 = safe_int(song_info.get('weeks at no.1'))
+        last_week = safe_int(song_info.get('last week'))
 
         chart_date = parse_date(date)  # Placeholder date
 
@@ -54,7 +65,9 @@ def process_song_data(date):
                 'peak_position': peak_position,
                 'weeks_on_chart': weeks_on_chart,
                 'label': '',
-                'genre': ''
+                'genre': '',
+                'weeks_at_no_1': weeks_at_no_1,
+                'last_week': last_week
             }
         )
         if created:

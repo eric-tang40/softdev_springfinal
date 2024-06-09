@@ -69,3 +69,21 @@ python manage.py migrate
 python manage.py runserver
 
 Go to http://localhost:8000
+
+IMPORTANT: You must uncomment out the two lines of code after migrating the database models.
+
+## Vue.js Code
+
+source env_3.11.5/bin/activate (Mac/Linux) or env_3.11.5\Scripts\activate (Windows) (Make sure your environment is active)
+
+nodeenv --node=20.11.1 --prebuilt env_node_20.11.1
+
+deactivate
+
+source env_node_20.11.1/bin/activate
+
+cd billboard_vue/
+
+npm install
+
+npm run dev
