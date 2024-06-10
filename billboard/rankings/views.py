@@ -50,7 +50,9 @@ def update_songs(request):
     
     return redirect(redirect_url)
 
-
+import matplotlib.pyplot as plt
+from io import BytesIO
+import base64
 class SongDetailView(LoginRequiredMixin, DetailView):
     model = Song
     template_name = 'rankings/song_detail.html'
@@ -73,6 +75,27 @@ class SongDetailView(LoginRequiredMixin, DetailView):
             'favorite': is_favorite,
         }
         context['song_dict'] = song_dict
+        
+        song_entries = Song.objects.filter(title=self.object.title, artist=self.object.artist).order_by('chart_date')
+        dates = [song.chart_date for song in song_entries]
+        ranks = [song.rank for song in song_entries]
+        
+        plt.figure(figsize=(10, 5))
+        plt.plot(dates, ranks)
+        plt.gca().invert_yaxis()
+        plt.title(f"Billboard History for {self.object.title}")
+        plt.xlabel('Date')
+        plt.ylabel('Billboard Rank')
+        plt.grid(True)
+        plt.xticks(rotation=45)
+        
+        buf = BytesIO()
+        plt.savefig(buf, format='png', bbox_inches='tight')
+        plt.close()
+        buf.seek(0)
+        image_base64 = base64.b64encode(buf.getvalue()).decode('utf-8')
+        context['chart_image'] = image_base64
+        
         return context
 
 
@@ -83,8 +106,12 @@ def toggle_favorites(request, song_id):
 
     song = get_object_or_404(Song, pk=song_id)
     favorite = Favorite.objects.filter(user=request.user, song__title=song.title)
+    redirect_to_favorites = request.POST.get('redirect_to_favorites', False)
+    
     if favorite.exists():
         favorite.delete()
+        if redirect_to_favorites:
+            return redirect('rankings:favorites')
         return JsonResponse({'status': 'removed'})
     else:
         Favorite.objects.create(user=request.user, song=song)
@@ -112,3 +139,6 @@ class FavoriteListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Favorite.objects.filter(user=self.request.user).order_by('added_date')
+
+def data_analysis(request):
+    return render(request, 'rankings/data_analysis.html')

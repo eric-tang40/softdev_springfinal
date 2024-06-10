@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Data Analysis for Past 30 Weeks</h1>
+    <h3>(Fridays: November 17, 2023 to June 7th, 2024)</h3>
+    <img src="/static/images/weeks_distribution.png"></img>
+    <p>Here, we can see that most songs stay less than 10 weeks
+        on the billboard, with over 100 songs. After that, there
+        is an even distribution of around 30 songs for each cluster
+        until just under 40 weeks. Then, there is another distribution
+        of around 10 songs until just under 65 weeks.
+    </p>
+    <img src="/static/images/peaks.png"></img>
+    <p>Most songs' peak position is at number 1. Then, it seems to descend
+        in numerical order, but peaks of 5 to 10 don't seem to have any 
+        correlation for the frequency of those peak positions.
+    </p>
+    <img src="/static/images/labels.png"></img>
+    <p>Most explicit songs don't stay on the billboard for much time, with
+        most having a tenure of under 10 weeks. However, the non-explicit 
+        songs have a more even distribution, with most songs having a tenure 
+        of greater than 20 weeks on the chart. This indicates that non-explicit
+        songs experience greater success.
+    </p>
+    <img src="/static/images/rank_changes.png"></img>
+    <p>This ranking is just a bit of interesting data for the change in rankings
+        on the billboard. The largest change is 54 spots, with the song Act II:
+        Date @ 8. All the big changes are in the green, due to a large fall not
+        physically being able to be shown on the billboard anymore.
+    </p>
+</div>
+{% endblock %}

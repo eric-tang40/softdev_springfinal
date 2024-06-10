@@ -10,4 +10,5 @@ urlpatterns = [
     path('songs/<int:song_id>/toggle_favorites/', views.toggle_favorites, name='toggle_favorites'),
     path('update-songs/', views.update_songs, name='update_songs'),
     path('favorites/', views.FavoriteListView.as_view(), name='favorites'),
+    path('data-analysis/', views.data_analysis, name='data_analysis'),
     ]

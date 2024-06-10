@@ -15,6 +15,7 @@ from rankings.models import Song
 
 from django.conf import settings
 import http.client
+from urllib.parse import quote
 
 
 def process_song_data(song):
@@ -25,7 +26,7 @@ def process_song_data(song):
         'x-rapidapi-host': "spotify23.p.rapidapi.com"
     }
     if not song.album_name or not song.label:
-        query = f"{song.title} {song.artist}".replace(" ", "%20")
+        query = quote(f"{song.title} {song.artist}")
         conn.request("GET", f"/search/?q={query}&type=tracks", headers=headers)
         res = conn.getresponse()
         data = res.read()

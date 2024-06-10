@@ -23,6 +23,7 @@
                     <td>
                         <form method="post" action="{% url 'rankings:toggle_favorites' favorite.song.id %}">
                             {% csrf_token %}
+                            <input type="hidden" name="redirect_to_favorites" value="true">
                             <button type="submit">Remove from Favorites</button>
                         </form>
                     </td>

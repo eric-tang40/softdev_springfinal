@@ -1,12 +1,25 @@
 # softdev_springfinal
 
-Collaborators: Eric Tang, Tejas Siddaramaiah, Jason Lei, Aiden Tan
+# Top 100 Billboard Tracker
 
-# Billboard
+Group Name: BTS(ETJLAT)
+Collaborators: Eric Tang, Tejas Siddaramaiah, Jason Lei, Aiden Tan
 
 # Roles
 
+1. Search Application: Jason, Eric, Aiden, and Tejas
+- Display Song Info: All
+2. Data Application: Tejas, Eric, and Jason
+- Display Song Info: Eric and Tejas
+- Adding Mechanism: Tejas
+- Display Graphs: All
+3. User Application: Tejas and Aiden
+- Login/Register: Aiden and Tejas
+- Connecting Account to Songs: Tejas
+
 # Description
+
+This website retrieves and display data regarding the Top 100 billboard. The song list table gives you an idea of the ranking of the top 10 songs for today. This website is always up to date and displays data such as song title, album, label, and rank. We also have a search feature to look up different songs. In each song detail, you can add or remove favorites, which will appear in the favorites tab where you can also remove favorites. Multiple different users can sign up using the register feature on the website.
 
 # APIs
 
@@ -56,7 +69,7 @@ For the secrets.json, we have given a template that you must follow to be able t
 
 ## Database Code
 
-IMPORTANT: You must comment out two lines of code before migrating the database models.
+IMPORTANT: If you have an error migrating, you must comment out two lines of code before migrating the database models.
 
 First, in billboard/billboard/settings.py, in the Installed Apps: 'django.contrib.admin'. We have left a comment denoting this.
 
@@ -70,7 +83,7 @@ python manage.py runserver
 
 Go to http://localhost:8000
 
-IMPORTANT: You must uncomment out the two lines of code after migrating the database models.
+IMPORTANT: If you commented out the two lines of code, you must uncomment them out after migrating the database models.
 
 ## Vue.js Code
 
