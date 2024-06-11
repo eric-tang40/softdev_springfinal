@@ -11,4 +11,5 @@ urlpatterns = [
     path('update-songs/', views.update_songs, name='update_songs'),
     path('favorites/', views.FavoriteListView.as_view(), name='favorites'),
     path('data-analysis/', views.data_analysis, name='data_analysis'),
+    path('artists/', views.ArtistView.as_view(), name='artists')
     ]

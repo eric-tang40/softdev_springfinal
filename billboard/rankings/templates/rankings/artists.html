@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Search by Artist Name</h2>
+<p>Filter songs based on an artist </p>
+
+<form method="get" action="{% url 'rankings:artists' %}">
+    <input type="text" name="c" value="{{ char }}" placeholder="Search for an artist">
+    <button type="submit">Search</button>
+</form>
+
+{% if songs %}
+    <ul>
+        {% for song in songs %}
+        <li><a href="{% url 'rankings:song_detail' song.id %}">{{ song.title }}</a> by {{ song.artist }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No artist found.</p>
+{% endif %}
+
+
+{% endblock %}

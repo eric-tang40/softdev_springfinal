@@ -23,8 +23,10 @@
             {% url 'rankings:search' as url2 %}
             {% url 'rankings:favorites' as url3 %}
             {% url 'rankings:data_analysis' as url4 %}
+            {% url 'rankings:artists' as url5 %}
             <li class="item"> <a href="{{url1}}" {% if request.path == url1 %} class="active"{% endif %}> Songs </a> </li>
             <li class="item"> <a href="{{url2}}" {% if request.path == url2 %} class="active"{% endif %}> Search </a> </li>
+            <li class="item"> <a href="{{url5}}" {% if request.path == url5 %} class="active"{% endif %}> Artists </a> </li>
             <li class="item"> <a href="{{url3}}" {% if request.path == url3 %} class="active"{% endif %}> Favorites </a> </li>
             <li class="item"> <a href="{{url4}}" {% if request.path == url4 %} class="active"{% endif %}> Data Analysis </a> </li>
         </ul>

@@ -140,5 +140,23 @@ class FavoriteListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Favorite.objects.filter(user=self.request.user).order_by('added_date')
 
+class ArtistView(LoginRequiredMixin, ListView):
+    model = Song
+    template_name = 'rankings/artists.html'
+    context_object_name = 'songs'
+
+    def get_queryset(self):
+        char = self.request.GET.get('c', '')
+        if char: 
+            return Song.objects.filter(artist__icontains=char).distinct('title')
+        else:
+            return Song.objects.none()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['char'] = self.request.GET.get('c', '')
+        return context
+
+
 def data_analysis(request):
     return render(request, 'rankings/data_analysis.html')
