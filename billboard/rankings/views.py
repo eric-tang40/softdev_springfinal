@@ -50,6 +50,8 @@ def update_songs(request):
     
     return redirect(redirect_url)
 
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
