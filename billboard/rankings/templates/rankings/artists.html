@@ -12,7 +12,7 @@
 {% if songs %}
     <ul>
         {% for song in songs %}
-        <li><a href="{% url 'rankings:song_detail' song.id %}">{{ song.title }}</a> by {{ song.artist }}</li>
+        <li><a href="{% url 'rankings:song_detail' song.id %}">{{ song.title }}</a> by <b>{{ song.artist }}</b></li>
         {% endfor %}
     </ul>
 {% else %}

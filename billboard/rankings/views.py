@@ -159,6 +159,6 @@ class ArtistView(LoginRequiredMixin, ListView):
         context['char'] = self.request.GET.get('c', '')
         return context
 
-
+@login_required
 def data_analysis(request):
     return render(request, 'rankings/data_analysis.html')

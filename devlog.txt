@@ -8,7 +8,7 @@ TejasS - 2024-05-30 23:12: Worked on the models and moved around files to fix th
 
 JasonL - 2024-06-02 10:45: helped debug an issue with user authentication alongside TejasS.
 
-TejasS - 2024-06-02 23:29: Fixed the code for the API so that we can access the data. Finished authentication where multiple different accounts can sign in and register. Made the database work for all the song data. Worked on the favorites feature and got the database part working but issues with the Vue portion.
+TejasS - 2024-06-02 23:29: Fixed the code for the API so that we can access the data. Finished authentication where multiple different accounts can sign in and register. Made the database work for all the song data. Worked on the favorites feature and got the database part working but issues with the Vue portion. Added second API to design document.
 
 AidenT - 2024-06-04 20:10: worked on search
 
@@ -29,3 +29,5 @@ TejasS - 2024-06-09 23:52: Fixed issue with fetching data from API. Added new da
 EricT - 2024-06-10 20:00. Added artist search application. 
 
 EricT - 2024-06-12 00:45. Edited final video
+
+TejasS - 2024-06-12 17:39: Tested out code. Added some final touches and updated design document.

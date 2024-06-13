@@ -67,21 +67,23 @@
     padding: 10px;
     background: #000;
     border-radius: 5px;
-}
+  }
 
-  /* Footer styling */
-  footer {
-    background: #333;
-    color: #fff;
-    text-align: center;
-    padding: 1rem;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+  table {
+    width: 50%;
+    border-collapse: collapse;
   }
   
-  footer p {
-    margin: 0;
+  th, td {
+    padding: 2px;
+    border: 1px solid black;
+    text-align: left;
+    vertical-align: top;
+  }
+  
+  th, td {
+    white-space: nowrap;
+    overflow: hidden;
   }
   
   /* Button styling */

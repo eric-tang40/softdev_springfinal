@@ -9,6 +9,7 @@ Collaborators: Eric Tang, Tejas Siddaramaiah, Jason Lei, Aiden Tan
 
 1. Search Application: Jason, Eric, Aiden, and Tejas
 - Display Song Info: All
+- Display Artist Info: All
 2. Data Application: Tejas, Eric, and Jason
 - Display Song Info: Eric and Tejas
 - Adding Mechanism: Tejas
@@ -19,7 +20,7 @@ Collaborators: Eric Tang, Tejas Siddaramaiah, Jason Lei, Aiden Tan
 
 # Description
 
-This website retrieves and display data regarding the Top 100 billboard. The song list table gives you an idea of the ranking of the top 10 songs for today. This website is always up to date and displays data such as song title, album, label, and rank. We also have a search feature to look up different songs. In each song detail, you can add or remove favorites, which will appear in the favorites tab where you can also remove favorites. Multiple different users can sign up using the register feature on the website.
+This website retrieves and display data regarding the Top 100 billboard. The song list table gives you an idea of the ranking of the top ten songs for today. This website is always up to date and displays data such as song title, album, label, and rank. We also have a search feature for songs and artists to look up different songs. In each song detail, you can add or remove favorites, which will appear in the favorites tab where you can also remove favorites. There is also a data analysis tab where you get analysis on the billboard for the past thirty Fridays. Multiple different users can sign up using the register feature on the website.
 
 # APIs
 
@@ -66,6 +67,12 @@ pip-sync requirements_env/main.txt requirements_env/dev.txt
 ## Run the Website
 
 For the secrets.json, we have given a template that you must follow to be able to properly run the website. We have added an additional line for the api key to be given by the user with the project files.
+
+You must go to the songs tab and choose a specific date on the calendar and press the "Filter" button to populate the table with all data for the filtered date, if there is any.
+
+If there is no data available, you must press the "Get Data" button to populate the database with all the songs, for the appropriate date that you filtered.
+
+If you added a lot of new data through the calendar and try to see a song detail, the website might take some time to load since we are accessing another API. Also, the first time you enter a new song detail, some data may be missing, but you just have to reload the page for the data to appear. We had an issue with migrations, so we had to do the process this way.
 
 ## Database Code
 
